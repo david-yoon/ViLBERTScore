@@ -227,8 +227,19 @@ for text_a, input_mask_a, segment_ids_a, features, spatials, image_mask, co_atte
     task = torch.from_numpy(np.array(task)).cuda().unsqueeze(0).repeat(spatials.size(0), 1)
     #break
     with torch.no_grad():
-        p5a, r5a, f5a = compute_bert_score(model, text_a, input_mask_a, segment_ids_a, 
-                                                           features, spatials, image_mask, co_attention_mask, input_idf_a, task, 0, 1, layer=layer)
+        p5a, r5a, f5a = compute_bert_score(model,
+                                           text_a,
+                                           input_mask_a,
+                                           segment_ids_a, 
+                                           features,
+                                           spatials,
+                                           image_mask,
+                                           co_attention_mask,
+                                           input_idf_a,
+                                           task,
+                                           0,
+                                           1,
+                                           layer=layer)
         if(len(prs_a) == 0):
             prs_a = p5a
             rcs_a = r5a
@@ -249,7 +260,15 @@ if(args.compute_correlation):
     print("F: %.3f"%kendalltau(scores, f1s_a)[0])
 
 # Save the results
-savefile = 'results/'+args.dataset+'.pkl'
+if os.path.isdir("results") == False:
+    os.mkdir("results")
+
+savefile = "results/" + args.dataset + ".csv"
+df_result = pd.DataFrame(data=[prs_a, rcs_a, f1s_a]).T
+df_result.columns = ["precision", "recall", "f1"]
+
 print('Saved the results to %s'%savefile)
-with open(savefile, 'wb') as f:
-    pickle.dump(final_results, f)
+df_result.to_csv(savefile, index=False)
+
+# with open(savefile, 'wb') as f:
+#     pickle.dump(final_results, f)
