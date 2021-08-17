@@ -17,13 +17,13 @@ cd ../
 
 
 # download flickr8k for testing
-# mkdir flickr8k
-# cd flickr8k
-# wget https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_Dataset.zip
-# unzip Flickr8k_Dataset.zip
-# wget https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_text.zip
-# unzip Flickr8k_text.zip
-# cd ../../
+mkdir flickr8k
+cd flickr8k
+wget https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_Dataset.zip
+unzip Flickr8k_Dataset.zip
+wget https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_text.zip
+unzip Flickr8k_text.zip
+cd ../../
 
 
 
