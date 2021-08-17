@@ -18,6 +18,7 @@ pip install -r requirements.txt
 
 2. Install pytorch
 ```
+conda install -c conda-forge cudatoolkit-dev==10.0 (if necessary)
 conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
 ```
 
