@@ -26,6 +26,12 @@ conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
 python setup.py develop
 ```
 
+4. Install related repository (optional) - if you want to compute vilbertscore from {image, gen_caption, gt_caption}
+```text
+sh install.sh
+```
+
+
 ## Pre-trained models
 
 We used two pre-trained models(pretrained ViLBERT, fine-tuned on 12 tasks) in our work. Please download the models in original [ViLBERT repository](https://github.com/facebookresearch/vilbert-multi-task) and save it to "save" dir. 
@@ -47,6 +53,15 @@ You can compute the scores using the following code.
 ```text
 python compute_vilbertscore.py --dataset flickr8k
 ```
+
+
+-----
+## Computing Score from {image, gen_caption, gt_caption}
+please refer to the notebook 
+```text
+notebooks/Compute_VilbertScore_from_image_genCaption_gtCaption.ipynb
+```
+
 
 ## License
 MIT license
