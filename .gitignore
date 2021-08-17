@@ -5,6 +5,8 @@ other_projects/
 data/detection
 data/flickr8k
 data/vilbert
+data/raw
+data/processed
 
 # test
 *TEST*

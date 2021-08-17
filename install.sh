@@ -17,6 +17,8 @@ cd ../
 
 
 # download flickr8k for testing
+# mkdir raw
+# cd raw
 # mkdir flickr8k
 # cd flickr8k
 # wget https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_Dataset.zip

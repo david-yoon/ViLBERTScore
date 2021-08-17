@@ -39,7 +39,7 @@ tokenizer = BertTokenizer.from_pretrained(
     'bert-base-uncased', do_lower_case=True
 )
 
-args = SimpleNamespace(from_pretrained= "save/multi_task_model.bin",
+args = SimpleNamespace(from_pretrained= "./data/vilbert/multi_task_model.bin",
                        bert_model="bert-base-uncased",
                        config_file="config/bert_base_6layer_6conect.json",
                        max_seq_length=101,
@@ -73,7 +73,7 @@ parser.add_argument("--dataset", type=str, default="flickr8k")
 parser.add_argument("--task", type=int, default=7)
 parser.add_argument("--layer", type=int, default=-1)
 parser.add_argument("--datadir", type=str, default='data')
-parser.add_argument("--model_path",type=str, default='save/multi_task_model.bin')
+parser.add_argument("--model_path",type=str, default='./data/vilbert/multi_task_model.bin')
 parser.add_argument("--compute_correlation",type=bool, default=False)
 
 args_ = parser.parse_args()
@@ -84,7 +84,7 @@ args.layer = args_.layer
 args.from_pretrained = args_.model_path
 args.compute_correlation = args_.compute_correlation
 
-if(args.from_pretrained == 'save/pretrained_model.bin'):
+if(args.from_pretrained == './data/vilbert/pretrained_model.bin'):
     args.task_specific_tokens = False
 
 config = BertConfig.from_json_file(args.config_file)
