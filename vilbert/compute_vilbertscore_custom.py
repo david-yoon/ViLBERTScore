@@ -32,7 +32,9 @@ from tqdm import tqdm
 from scipy.stats import kendalltau
 from torch.nn.functional import softmax
 from utils import *
-from dataset import CaptioningDataset
+
+# from dataset import CaptioningDataset
+from dataset_custom import CaptioningDataset
 from torch.utils.data import DataLoader
 
 from math import log
@@ -49,7 +51,7 @@ class VilbertScore():
         self.from_pretrained= "../data/vilbert/multi_task_model.bin"
         self.bert_model="bert-base-uncased"
         self.config_file="../config/bert_base_6layer_6conect.json"        
-        self.batch_size=32
+        self.batch_size=batch_size
         
         
         self.max_seq_length=101
@@ -122,18 +124,16 @@ class VilbertScore():
         self.savedir = self.datadir
         
         
-    def loaddata(self, path_image_feature, path_gen_caption, path_gt_caption):
+    def loaddata(self, list_image_feature, list_gen_caption, list_gt_caption):               
         
-        from dataset_custom import CaptioningDataset
+        self.list_image_feature = list_image_feature
+        self.list_gen_caption = list_gen_caption
+        self.list_gt_caption = list_gt_caption
         
-        dataset = CaptioningDataset(path_image_feature = path_image_feature,
-                                path_gen_caption   = path_gen_caption,
-                                path_gt_caption   = path_gt_caption,
-                                use_idf=False)
-        
-        self.path_image_feature = path_image_feature
-        self.path_gen_caption = path_gen_caption
-        self.path_gt_caption = path_gt_caption
+        dataset = CaptioningDataset(list_image_feature = list_image_feature,
+                                    list_gen_caption   = list_gen_caption,
+                                    list_gt_caption   = list_gt_caption,
+                                    use_idf=False)
         
         dataloader = DataLoader(dataset, self.batch_size, shuffle=False)
         
@@ -205,10 +205,10 @@ class VilbertScore():
     
     def compute(self):
         
-        print("target data path")
-        print("Images: ", self.path_image_feature)
-        print("Generated Captions: ", self.path_gen_caption)
-        print("Ground truth Captions: ", self.path_gt_caption)
+        print("target data")
+#         print("Images (5 samples): ", self.list_image_feature[:2])
+        print("Generated Captions (2 samples): ", self.list_gen_caption[:2])
+        print("Ground truth Captions (2 samples): ", self.list_gt_caption[:2])
         
 
         

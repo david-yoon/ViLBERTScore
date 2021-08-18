@@ -24,7 +24,7 @@ from copy import copy
 
 import sys
 sys.path.append("../vilbert")
-from extract_features import FeatureExtractor
+# from extract_features_custom import FeatureExtractor
 
 
 tokenizer = BertTokenizer.from_pretrained(
@@ -33,20 +33,25 @@ tokenizer = BertTokenizer.from_pretrained(
 
 class CaptioningDataset(Dataset):
     
-    def __init__(self, path_image_feature, path_gen_caption, path_gt_caption, savedir="./", max_len=37, use_idf=False):
+    def __init__(self, list_image_feature, list_gen_caption, list_gt_caption, savedir="./", max_len=37, use_idf=False):
 
         super(CaptioningDataset, self).__init__()
         
-        with open(path_image_feature, "rb") as f:
-            self.imgs = pickle.load(f)
-            
-        with open(path_gen_caption, "r") as f:
-            self.cand_caps = f.readlines()
-            self.cand_caps = [x.strip() for x in self.cand_caps]
         
-        with open(path_gt_caption, "r") as f:
-            self.gt_caps = f.readlines()
-            self.gt_caps = [x.strip() for x in self.gt_caps]
+        self.imgs = list_image_feature
+        self.cand_caps = list_gen_caption
+        self.gt_caps = list_gt_caption
+        
+#         with open(path_image_feature, "rb") as f:
+#             self.imgs = pickle.load(f)
+            
+#         with open(path_gen_caption, "r") as f:
+#             self.cand_caps = f.readlines()
+#             self.cand_caps = [x.strip() for x in self.cand_caps]
+        
+#         with open(path_gt_caption, "r") as f:
+#             self.gt_caps = f.readlines()
+#             self.gt_caps = [x.strip() for x in self.gt_caps]
         
         
         self.scores = [1]*len(self.cand_caps) # without human scores       
