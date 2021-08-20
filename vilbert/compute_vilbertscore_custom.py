@@ -53,8 +53,6 @@ class VilbertScore():
         self.config_file="../config/bert_base_6layer_6conect.json"        
         self.batch_size=batch_size
         
-        
-        self.max_seq_length=101
         self.train_batch_size=1
         self.do_lower_case=True
         self.predict_feature=False
@@ -124,15 +122,17 @@ class VilbertScore():
         self.savedir = self.datadir
         
         
-    def loaddata(self, list_image_feature, list_gen_caption, list_gt_caption):               
+    def loaddata(self, list_image_feature, list_gen_caption, list_gt_caption, max_len=40):               
         
         self.list_image_feature = list_image_feature
         self.list_gen_caption = list_gen_caption
         self.list_gt_caption = list_gt_caption
+        self.max_seq_length=max_len
         
         dataset = CaptioningDataset(list_image_feature = list_image_feature,
                                     list_gen_caption   = list_gen_caption,
                                     list_gt_caption   = list_gt_caption,
+                                    max_len=max_len,
                                     use_idf=False)
         
         dataloader = DataLoader(dataset, self.batch_size, shuffle=False)
