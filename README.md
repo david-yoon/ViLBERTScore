@@ -1,5 +1,13 @@
 # ViLBERTScore
 
+
+<h3>
+Note: This repository is forked from the original repository for further experiments.
+</h3>
+
+------------------
+
+
 This repository provides an evaluation metric for image captioning using ViLBERT which is based on our paper [ViLBERTScore: Evaluating Image Caption Using Vision-and-Language BERT](https://www.aclweb.org/anthology/2020.eval4nlp-1.4/).
 
 ## Repository Setup
